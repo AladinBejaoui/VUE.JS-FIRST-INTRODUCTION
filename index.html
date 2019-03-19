@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon titre</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
+  <link href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+  <link rel="stylesheet" href="loaderstyle.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+  <!-- CHARGEMENT PRELOADER -->
+
+  <script>
+  $(window).load(function() {
+  $(".se-pre-con").fadeOut("slow");;
+  });
+  </script>
+
+  <!-- FIN CHARGEMENT PRELOADER -->
+
+
+  <div class="se-pre-con"></div>
+  <div id="container row">
+    <div id="banner" class="p-0 col-12">
+      <img id="bannerimage" src="images/logo.png" alt="">
+    </div>
+    <div class="container-fluid text-center pt-3 col-12">
+      <span id="nbradh" class="whity">{{value}}</span>
+    </div>
+    <div class="text-center pt-3 col-12" id="avgage">
+      <span class="whity">{{average}}</span>
+    </div>
+    <div class="text-center pt-3 col-12 pb-5" id="regyear">
+      <span class="whity">{{value}}</span>
+    </div>
+    <div class="text-center pari">
+      <span class="whity">Parité Homme/Femmes</span>
+    </div>
+    <div class="pt-3 pb-4 row m-0 " id="donutdiv">
+      <div class="row col-12 m-0 ">
+        <div class="col-3 text-center align-self-center p-0" id="male">
+          <span class="whity">{{malecount}}</span>
+        </div>
+        <canvas id="canvas" class="col-6 text-center p-0"></canvas>
+        <div class="col-3 text-center align-self-center p-0" id="female">
+          <span class="whity">{{femalecount}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid text-center p-0 m-0">
+
+
+      <div id="content">
+        <div class="text-center pb-2">
+          <input type="text" v-model="search" placeholder="Chercher un nom" class="searchbar text-center" id="bodytable"> <!-- le v-model permet d'effectuer une liaison avec vue.js -->
+        </div>
+        <div class="form-group col-6 offset-3 ">
+          <!--		Show Numbers Of Rows 		-->
+          <select class="form-control" name="state" id="maxRows">
+            <option class="text-center" value="200">200</option>
+            <option class="text-center" value="300">300</option>
+            <option class="text-center" value="500">500</option>
+            <option class="text-center" value="100000000">Voir tout</option>
+          </select>
+        </div>
+        <div class="blacky">
+          <table class="table table-default table-striped table-bordered col-12 justify-content-center" id="table-id">
+            <thead>
+              <tr>
+                <th>NAME<i class="fas fa-arrow-down pl-2" id="name"></i><i class="fas fa-arrow-up pl-2" id="namereverse"></i></th>
+                <th>AGE<i class="fas fa-arrow-down pl-2" id="age"></i><i class="fas fa-arrow-up pl-2" id="agereverse"></i></th>
+                <th>GENDER<i class="fas fa-arrow-down pl-2" id="gender"></i><i class="fas fa-arrow-up pl-2" id="genderreverse"></i></th>
+                <th class="hiddenxl">INSCRIT LE <i class="fas fa-arrow-down pl-2" id="registration"></i><i class="fas fa-arrow-up pl-2" id="registrationreversed"></i></th>
+                <th class="hiddenxxl">N° ADHERENT<i class="fas fa-arrow-down pl-2" id="adhnumber"></i><i class="fas fa-arrow-up pl-2" id="adhnumberreverse"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="adherent in filtreNom" v-on:click="selection(adherent)">
+                <!--  vas chercher les les elements adhérents dans le filtrenom qui est une fonction  -->
+                <td><a href="#mylightbox">{{adherent.name}}</a></td>
+                <td>{{adherent.age}} ans</td>
+                <td>{{adherent.gender}}</td>
+                <td class="hiddenxl">{{adherent.registered}}</td>
+                <td class="hiddenxxl">{{adherent._id}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="mylightbox" class="text-white">
+            <p class="pt-2">NOM : {{utilisateur.name}}<br></p>
+            <p class="pt-5">SEXE : {{utilisateur.gender}}<br></p>
+            <p class="pt-5">AGE : {{utilisateur.age}} <br></p>
+            <p class="pt-5">ADRESSE : {{utilisateur.address}}<br></p>
+            <p class="pt-5">LATITUDE : {{utilisateur.latitude}}<br></p>
+            <p class="pt-5">LONGITUDE : {{utilisateur.longitude}}<br></p>
+            <p class="pt-5 pb-2">N° d'ADHERENT : {{utilisateur._id}}<br></p>
+            <a href="#bodytable"><button type="button" name="button" class="btn btn-light pb-2 mb-2">Retour a la liste</button></a>
+
+
+          </div>
+          <div class='pagination-container col-4'>
+            <nav>
+              <ul class="pagination">
+
+                <li data-page="prev">
+                  <span>
+                    <span class="sr-only">(current)
+                    </span></span>
+                </li>
+                <li data-page="next" id="prev">
+                  <span> > <span class="sr-only">(current)</span></span>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="database.json"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="vue.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

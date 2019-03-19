@@ -1,0 +1,100 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pari>span {
+  font-size: 20px;
+}
+
+.whity {
+  color: black;
+  font-size: 18px;
+}
+
+.blacky {
+  background-color: white;
+}
+
+#table-id {
+  background-color: white
+}
+
+#banner {
+background-image: linear-gradient(#ce0033, white,#ce0033);
+}
+
+#mylightbox {
+  border: solid black 2px;
+  border-radius: 5px;
+  background-color: #ce0033;
+}
+
+tbody {
+  height: 300px;
+}
+
+#bannerimage {
+  margin-left: 30px;
+  height: 150px;
+  width: 100px;
+}
+
+.bar {
+  height: 300px;
+  overflow-y: auto;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+.searchbar {
+  border: 1px solid black;
+}
+
+table th, table td {
+  text-align: center;
+  padding: 0;
+}
+
+table tr:nth-child(even) {
+  background-color: #ce0033;
+  color: white
+}
+
+.pagination li:hover {
+  cursor: pointer;
+}
+
+li {
+  padding: 3px;
+}
+
+.hiddenxl {
+  display: none;
+}
+
+.hiddenxxl {
+  display: none;
+}
+
+@media screen and (min-width:1000px) {
+  li {
+    padding: 10px;
+  }
+
+  .hiddenxl {
+    display: table-cell;
+  }
+}
+
+@media screen and (min-width:1200px) {
+  li {
+    padding: 10px;
+  }
+
+  .hiddenxxl {
+    display: table-cell;
+  }
+}
